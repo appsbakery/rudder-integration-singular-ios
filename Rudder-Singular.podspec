@@ -13,10 +13,10 @@ Pod::Spec.new do |s|
     s.source           = { :git => 'https://github.com/rudderlabs/rudder-integration-singular-ios.git', :tag => "v#{s.version}" }
     s.platform         = :ios, "13.0"
 
-    s.pod_target_xcconfig = {
-      'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
-    }
-    s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+    # s.pod_target_xcconfig = {
+    #   'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+    # }
+    # s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
     s.source_files = 'Rudder-Singular/Classes/**/*'
     
