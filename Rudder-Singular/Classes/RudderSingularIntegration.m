@@ -12,6 +12,7 @@
 static bool isSKANEnabled = NO;
 static bool isManualMode = NO;
 static void(^conversionValueUpdatedCallback)(NSInteger);
+static void(^conversionValuesUpdatedCallback)(NSNumber *, NSNumber *, BOOL);
 static int waitForTrackingAuthorizationWithTimeoutInterval = 0;
 static bool isInitialized = NO;
 
@@ -41,6 +42,7 @@ static bool isInitialized = NO;
             config.skAdNetworkEnabled = isSKANEnabled;
             config.manualSkanConversionManagement = isManualMode;
             config.conversionValueUpdatedCallback = conversionValueUpdatedCallback;
+            config.conversionValuesUpdatedCallback = conversionValuesUpdatedCallback;
             config.waitForTrackingAuthorizationWithTimeoutInterval = waitForTrackingAuthorizationWithTimeoutInterval;
             
             [Singular start:config];
@@ -134,6 +136,17 @@ static bool isInitialized = NO;
     isSKANEnabled = skAdNetworkEnabled;
     isManualMode = manualMode;
     conversionValueUpdatedCallback = conversionValueUpdatedHandler;
+    waitForTrackingAuthorizationWithTimeoutInterval = waitTrackingAuthorizationWithTimeoutInterval ? [waitTrackingAuthorizationWithTimeoutInterval intValue] : 0;
+}
+
++ (void)setSKAN4Options:(BOOL)skAdNetworkEnabled isManualSkanConversionManagementMode:(BOOL)manualMode withWaitForTrackingAuthorizationWithTimeoutInterval:(NSNumber* _Nullable)waitTrackingAuthorizationWithTimeoutInterval withConversionValuesUpdatedHandler:(void(^_Nullable)(NSNumber * _Nullable, NSNumber * _Nullable, BOOL))conversionValuesUpdatedHandler {
+    if (isInitialized) {
+        NSLog(@"Singular Warning: setSKAN4Options should be called before init");
+    }
+
+    isSKANEnabled = skAdNetworkEnabled;
+    isManualMode = manualMode;
+    conversionValuesUpdatedCallback = conversionValuesUpdatedHandler;
     waitForTrackingAuthorizationWithTimeoutInterval = waitTrackingAuthorizationWithTimeoutInterval ? [waitTrackingAuthorizationWithTimeoutInterval intValue] : 0;
 }
 
